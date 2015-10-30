@@ -51,11 +51,14 @@ public class TTTGui {
 		Game.clearBoard();
 		Component[] cells = gameGrid.getComponents();
 		for (int i = 0; i < cells.length; i++) {
-    		if (cells[i] instanceof JButton) {
-    			((JButton)cells[i]).setText("");
-    			((JButton)cells[i]).setEnabled(true);
-    		}
+			
+			if (cells[i] instanceof JButton) {
+				
+    		((JButton)cells[i]).setText("");
+    		((JButton)cells[i]).setEnabled(true);
+    		
     	}
+    }
 		
 		//Obtain new starting player
 		int  n = rand.nextInt(2);		//Returns 0 or 1
@@ -65,8 +68,8 @@ public class TTTGui {
 			curLetter = 'O';
 		
 		status.setForeground(Color.BLACK);
-    	status.setText("Player " + curLetter + " Turn ");
-    	turns = 0;
+    status.setText("Player " + curLetter + " Turn ");
+    turns = 0;
 		
 	}
 	
@@ -88,45 +91,49 @@ public class TTTGui {
 		gameGrid = new JPanel();
 		gameGrid.setLayout(new GridLayout(3,3));
 		
+	//Creates 9 buttons each with a actionlistener to handle the clicks
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
+				
 				JButton button = new JButton();
 				button.setName(i + " " + j);
 				button.addActionListener(new ActionListener() {
 					
 					//Button updates game logic and UI elements, checks if a possible win is met
 					@Override
-	                public void actionPerformed(ActionEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						turns++;
 						
 						//Update the game board and button
 						String[] coordinates = ((JButton)e.getSource()).getName().split(" ");
-	                    Game.insertLetter(curLetter, Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-	                    ((JButton)e.getSource()).setText(curLetter + "");
-	                    ((JButton)e.getSource()).setFont(new Font("Serif", Font.BOLD, 40));
-	                    ((JButton)e.getSource()).setEnabled(false);
+	          Game.insertLetter(curLetter, Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+	          ((JButton)e.getSource()).setText(curLetter + "");
+	          ((JButton)e.getSource()).setFont(new Font("Serif", Font.BOLD, 40));
+	          ((JButton)e.getSource()).setEnabled(false);
 	                    
-	                    
-	                    //Check if game is over, (little optimization, ignore checking for a win if less than 4 turns)
-	                    if (turns > 4 && Game.calcWin()) {
-	                    	Component[] cells = gameGrid.getComponents();
-	                    	for (int i = 0; i < cells.length; i++) {
-	                    		if (cells[i] instanceof JButton) {
-	                    			cells[i].setEnabled(false);
-	                    		}
-	                    	}
-	                    	status.setForeground(Color.RED);
-	                    	status.setText("Player " + curLetter + " Wins ");
-	                    }
-	                    else {
-	                    	//Else Swap letters and change turn
-		                    if (curLetter == 'O')
-		            			curLetter = 'X';
-		            		else 
-		            			curLetter = 'O';
-		                    
-	                    	status.setText("Player " + curLetter + " Turn ");
-	                    }
+	          //Check if game is over, (little optimization, ignore checking for a win if less than 4 turns)
+	          if (turns > 4 && Game.calcWin()) {
+	          	
+	          	Component[] cells = gameGrid.getComponents();
+	          	for (int i = 0; i < cells.length; i++) {
+	          		if (cells[i] instanceof JButton) {
+	          			cells[i].setEnabled(false);
+	              }
+	           	}
+	            status.setForeground(Color.RED);
+	            status.setText("Player " + curLetter + " Wins ");
+	            
+	          }
+	          //Else Swap letters and change turn
+	          else {
+
+		          if (curLetter == 'O')
+		          	curLetter = 'X';
+		          else 
+		          	curLetter = 'O';
+		          status.setText("Player " + curLetter + " Turn ");
+		          
+	          }
 					}
 					
 				});
@@ -159,6 +166,6 @@ public class TTTGui {
 	//Main initializes the GUI components and logic is established as a result
 	public static void main(String[] args) {
 		TTTGui startGame = new TTTGui();
-		
 	}
-}
+	
+}//TTTGui 

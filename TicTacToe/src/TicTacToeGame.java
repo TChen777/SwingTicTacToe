@@ -30,13 +30,15 @@ public class TicTacToeGame {
 	public boolean calcWin() {
 		boolean win = false;
 		
+			//Check each row
 			for (int r = 0; r < 3; r++) {
 				if ((gameBoard[r][0] != ' ') && (gameBoard[r][0] == gameBoard[r][1]) && (gameBoard[r][1] == gameBoard[r][2])){
 					win = true;
 					break;
 				}
 			}
-			//Stop checking if already found a win
+			
+			//Check each column, stop checking if already found a win
 			if (!win) {
 				for (int c = 0; c < 3; c++) {
 					if ((gameBoard[0][c] != ' ') && (gameBoard[0][c] == gameBoard[1][c]) && (gameBoard[1][c] == gameBoard[2][c])) {
@@ -45,13 +47,16 @@ public class TicTacToeGame {
 					}
 				}
 			}
-			//Stop checking if already found a win
+			
+			//Check diagonals, stop checking if already found a win
 			if (!win) {
 				if ( (gameBoard[0][0] != ' ') && (gameBoard[0][0] == gameBoard[1][1]) && (gameBoard[1][1] == gameBoard[2][2]) || 
 						(gameBoard[0][2] != ' ') && (gameBoard[0][2] == gameBoard[1][1]) && (gameBoard[1][1] == gameBoard[2][0]) ) {
 					win = true;
 				}
 			}
+			
 		return win;
 	}
-}
+	
+}//TicTacToeGame
