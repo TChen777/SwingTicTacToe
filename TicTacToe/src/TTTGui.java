@@ -124,15 +124,23 @@ public class TTTGui {
 	            status.setText("Player " + curLetter + " Wins ");
 	            
 	          }
-	          //Else Swap letters and change turn
 	          else {
-
-		          if (curLetter == 'O')
-		          	curLetter = 'X';
-		          else 
-		          	curLetter = 'O';
-		          status.setText("Player " + curLetter + " Turn ");
-		          
+	            //Check if cells are full, if so its a tie, else Swap letters and change turn
+	            if (turns == 9) {
+	              
+	              status.setForeground(Color.RED);
+	              status.setText("It's a tie");
+	              
+	            }
+	            else {
+	              
+  		          if (curLetter == 'O')
+  		          	curLetter = 'X';
+  		          else 
+  		          	curLetter = 'O';
+  		          
+  		          status.setText("Player " + curLetter + " Turn ");
+	            }
 	          }
 					}
 					
